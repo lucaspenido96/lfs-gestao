@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposta de Crédito - LFS Financial Advisory</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Georgia', serif;
+      background: #fff;
+      color: #1a1a2e;
+      width: 210mm;
+      min-height: 297mm;
+    }
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    /* Header */
+    .header {
+      background: #0A1628;
+      padding: 32px 48px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .brand {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-name {
+      font-size: 36px;
+      font-weight: bold;
+      color: #C9A84C;
+      letter-spacing: 8px;
+      font-family: Georgia, serif;
+    }
+    .brand-tagline {
+      font-size: 9px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    .header-right {
+      text-align: right;
+    }
+    .header-date {
+      font-size: 10px;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .header-date strong {
+      display: block;
+      color: rgba(255,255,255,0.8);
+      font-size: 12px;
+      margin-top: 2px;
+    }
+    /* Gold divider */
+    .gold-bar {
+      height: 3px;
+      background: linear-gradient(90deg, #C9A84C, #E8C97A, #C9A84C);
+    }
+    /* Content */
+    .content {
+      flex: 1;
+      padding: 40px 48px;
+    }
+    .section-title {
+      font-size: 9px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #C9A84C;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #f0e6d0;
+    }
+    .client-block {
+      margin-bottom: 32px;
+    }
+    .client-label {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 4px;
+    }
+    .client-name {
+      font-size: 22px;
+      font-weight: bold;
+      color: #0A1628;
+    }
+    /* Proposal table */
+    .proposal-grid {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 32px;
+    }
+    .proposal-grid tr {
+      border-bottom: 1px solid #f5f5f5;
+    }
+    .proposal-grid tr:last-child {
+      border-bottom: none;
+    }
+    .proposal-grid td {
+      padding: 10px 0;
+      vertical-align: top;
+    }
+    .proposal-grid td.label {
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      width: 200px;
+      padding-right: 16px;
+    }
+    .proposal-grid td.value {
+      font-size: 13px;
+      color: #1a1a2e;
+      font-weight: 500;
+    }
+    .value-highlight {
+      font-size: 18px;
+      font-weight: bold;
+      color: #0A1628;
+    }
+    /* Fee block */
+    .fee-block {
+      background: #0A1628;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .fee-label {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+    .fee-value {
+      font-size: 16px;
+      font-weight: bold;
+      color: #C9A84C;
+      margin-top: 4px;
+    }
+    .fee-right {
+      text-align: right;
+    }
+    .fee-right .fee-label { color: rgba(255,255,255,0.4); }
+    /* Footer */
+    .footer {
+      background: #0A1628;
+      padding: 20px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-brand {
+      font-size: 14px;
+      font-weight: bold;
+      color: #C9A84C;
+      letter-spacing: 4px;
+    }
+    .footer-info {
+      font-size: 9px;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 1px;
+    }
+    .footer-disclaimer {
+      font-size: 8px;
+      color: rgba(255,255,255,0.25);
+      margin-top: 2px;
+    }
+    .confidential {
+      font-size: 8px;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <!-- Header -->
+  <div class="header">
+    <div class="brand">
+      <div class="brand-name">LFS</div>
+      <div class="brand-tagline">Financial Advisory</div>
+    </div>
+    <div class="header-right">
+      <div class="header-date">
+        Data da Proposta
+        <strong>{{DATA}}</strong>
+      </div>
+    </div>
+  </div>
+  <div class="gold-bar"></div>
+
+  <!-- Content -->
+  <div class="content">
+    <!-- Client -->
+    <div class="client-block">
+      <div class="client-label">Proposta de Crédito para</div>
+      <div class="client-name">{{NOME_CLIENTE}}</div>
+    </div>
+
+    <!-- Main fields -->
+    <div class="section-title">Condições da Operação</div>
+    <table class="proposal-grid">
+      <tr>
+        <td class="label">Modalidade</td>
+        <td class="value">{{MODALIDADE}}</td>
+      </tr>
+      <tr>
+        <td class="label">Valor da Operação</td>
+        <td class="value value-highlight">{{VALOR}}</td>
+      </tr>
+      <tr>
+        <td class="label">Finalidade</td>
+        <td class="value">{{FINALIDADE}}</td>
+      </tr>
+      <tr>
+        <td class="label">Prazo</td>
+        <td class="value">{{PRAZO}}</td>
+      </tr>
+      <tr>
+        <td class="label">Forma de Pagamento</td>
+        <td class="value">{{FORMA_PAGAMENTO}}</td>
+      </tr>
+      <tr>
+        <td class="label">Encargos Financeiros</td>
+        <td class="value">{{ENCARGOS}}</td>
+      </tr>
+      <tr>
+        <td class="label">IOF</td>
+        <td class="value">{{IOF}}</td>
+      </tr>
+      <tr>
+        <td class="label">Garantias</td>
+        <td class="value">{{GARANTIAS}}</td>
+      </tr>
+    </table>
+
+    <!-- Fee block -->
+    <div class="fee-block">
+      <div>
+        <div class="fee-label">Fee de Sucesso LFS</div>
+        <div class="fee-value">{{FEE_SUCESSO}}</div>
+      </div>
+      <div class="fee-right">
+        <div class="fee-label">Belo Horizonte — MG</div>
+        <div style="color:rgba(255,255,255,0.3); font-size:10px; margin-top:4px;">lfsfinancial.com.br</div>
+      </div>
+    </div>
+
+    <!-- Disclaimer -->
+    <p style="font-size:8px; color:#bbb; line-height:1.6;">
+      Esta proposta é meramente indicativa e não constitui compromisso de concessão de crédito.
+      As condições apresentadas estão sujeitas à análise e aprovação da instituição financeira.
+      Documento de uso interno e confidencial — LFS Financial Advisory.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">LFS</div>
+    <div style="text-align:center;">
+      <div class="footer-info">LFS Financial Advisory · Belo Horizonte, MG</div>
+      <div class="footer-disclaimer">Assessoria em Crédito Corporativo e Estruturado</div>
+    </div>
+    <div class="confidential">Confidencial</div>
+  </div>
+</div>
+</body>
+</html>

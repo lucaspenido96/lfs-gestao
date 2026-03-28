@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  proposals Proposal[]
+  @@map("users")
+}
+
+model Client {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  proposals Proposal[]
+  @@map("clients")
+}
+
+model Bank {
+  id          String           @id @default(cuid())
+  name        String           @unique
+  active      Boolean          @default(true)
+  createdAt   DateTime         @default(now())
+  submissions BankSubmission[]
+  @@map("banks")
+}
+
+model Proposal {
+  id               String         @id @default(cuid())
+  userId           String
+  user             User           @relation(fields: [userId], references: [id])
+  clientId         String
+  client           Client         @relation(fields: [clientId], references: [id])
+  modality         String
+  value            Decimal        @db.Decimal(15, 2)
+  purpose          String
+  termMonths       Int
+  paymentMethod    String
+  financialCharges Decimal        @db.Decimal(8, 4)
+  iof              Decimal        @db.Decimal(15, 2)
+  guarantees       String
+  successFee       Decimal        @db.Decimal(8, 4)
+  proposalDate     DateTime
+  sourceType       ProposalSource @default(MANUAL)
+  extractionScore  Float?
+  pdfData          Bytes?
+  pdfFileName      String?
+  status           ProposalStatus @default(DRAFT)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  submissions      BankSubmission[]
+  @@map("proposals")
+}
+
+enum ProposalSource {
+  UPLOAD
+  MANUAL
+}
+
+enum ProposalStatus {
+  DRAFT
+  GENERATED
+  SUBMITTED
+}
+
+model BankSubmission {
+  id         String           @id @default(cuid())
+  proposalId String
+  proposal   Proposal         @relation(fields: [proposalId], references: [id])
+  bankId     String
+  bank       Bank             @relation(fields: [bankId], references: [id])
+  status     SubmissionStatus @default(SENT)
+  notes      String?
+  sentAt     DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+  @@map("bank_submissions")
+}
+
+enum SubmissionStatus {
+  SENT
+  IN_ANALYSIS
+  APPROVED
+  REJECTED
+  CANCELLED
+}
