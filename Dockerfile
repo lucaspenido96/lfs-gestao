@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /app
 
 COPY package.json package-lock.json ./
+COPY prisma ./prisma
 
 # Use npm install (not npm ci) to avoid lock file sync issues
 RUN npm install --include=dev
