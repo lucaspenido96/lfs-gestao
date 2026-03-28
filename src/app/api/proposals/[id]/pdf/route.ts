@@ -13,7 +13,7 @@ export async function GET(_req: Request, { params }: { params: { id: string } })
   if (proposal.userId !== session.user.id) return new Response(null, { status: 403 })
   if (!proposal.pdfData) return new Response(null, { status: 404 })
 
-  return new Response(proposal.pdfData, {
+  return new Response(new Uint8Array(proposal.pdfData), {
     headers: {
       'Content-Type': 'application/pdf',
       'Content-Disposition': `attachment; filename="${proposal.pdfFileName || 'proposta.pdf'}"`,
